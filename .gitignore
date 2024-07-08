@@ -1,0 +1,16 @@
+# vim/ide files
+*.swp
+*.swo
+
+# python bytecode
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# common generated output
+*.png
+*.html
+lib/
+
+
