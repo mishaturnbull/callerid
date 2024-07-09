@@ -16,6 +16,7 @@ def bar(x):
     return baz(x)
 
 def baz(x):
+    print(x)
     return x
 
 if __name__ == '__main__':
@@ -25,7 +26,7 @@ if __name__ == '__main__':
     psrc = plantuml.render_to_plantuml_src(uni, plantuml.PLANTUML_RENDER_OPTIONS)
     plantuml.render_to_image(psrc, 'graph.png')
     pvn = pyvis.make_pyvis_net(uni, rvfunc=repr)
-    pvn.show('graph.html', notebook=False)
+#    pvn.show('graph.html', notebook=False)
 
     from pprint import pprint
     import code; code.interact(local={**locals(), **globals()})

@@ -15,25 +15,22 @@ from callerid import util
 DEFAULT_UNIVERSE = Universe()
 
 def cb_hashfn(args, kwargs):
-    frame = args[0]
-    info = util.info(frame)
+    info = args[0]
     name = info['path'] + ':' + info['name']
     return name
 
 class Node (Vertex, metaclass=singleton.semi_singleton_metaclass(cb_hashfn)):
 
-    def __init__(self, frame):
-        info = util.info(frame)
-        super().__init__(universes=[DEFAULT_UNIVERSE], attributes=info)
+    def __init__(self, frameinfo):
+        super().__init__(universes=[DEFAULT_UNIVERSE], attributes=frameinfo)
 
-        self.frame = frame
-        self.fullname = cb_hashfn([frame], None)
+        self.fullname = cb_hashfn([frameinfo], None)
 
     def __repr__(self):
         return f"<CallerID node {self.fullname} @ {hex(id(self))}>"
 
 
-class TracerConfig (metclass=singleton.TrueSingleton):
+class TracerConfig (metaclass=singleton.TrueSingleton):
 
     def __init__(self, filters=None):
         self.filters = filters or []
@@ -48,9 +45,9 @@ class TracerConfig (metclass=singleton.TrueSingleton):
         return False
 
     def should_record_call(self, caller, callee):
-        if check_filter(caller.fullname):
+        if self.check_filter(cb_hashfn([caller], None)):
             return False
-        if check_filter(callee.fullname):
+        if self.check_filter(cb_hashfn([callee], None)):
             return False
         return True
 
