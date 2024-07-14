@@ -13,4 +13,7 @@ __pycache__/
 *.html
 lib/
 
+# wheel build stuff
+dist/
+*.egg-info/
 

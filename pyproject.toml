@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+dynamic = ["version"]
+name = "callerid"
+requires-python = ">= 3.8"
+dependencies = [
+   "edgegraph"
+]
+readme = "README.md"
+license = {file = "LICENSE.txt"}
+description = "Python run-time call tracing utility."
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[project.urls]
+Repository = "https://github.com/mishaturnbull/callerid"
+
+[tool.setuptools.dynamic]
+version = {attr = "callerid.__version__"}
+
+
